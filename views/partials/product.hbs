@@ -1,0 +1,17 @@
+<div class="product-detail">
+  <h2 class="product-detail__title">{{product.name}}</h2>
+  <img class="product-detail__main-image" src="{{product.mainImage}}" alt="Главное изображение товара">
+
+  <p class="product-detail__price">Цена: <strong>{{product.price}} рублей</strong></p>
+  <p class="product-detail__description">{{product.description}}</p>
+
+  {{#if product.images.length}}
+    <div class="product-detail__gallery">
+      {{#each product.images}}
+        <img src="{{this}}" class="product-detail__image" alt="Изображение товара">
+      {{/each}}
+    </div>
+  {{/if}}
+
+  <a href="/" class="product-detail__back">← Назад в каталог</a>
+</div>

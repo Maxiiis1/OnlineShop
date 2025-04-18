@@ -1,0 +1,22 @@
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/styles/outlines.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+</head>
+
+<header class="header">
+  <div class="header__logo">
+    <img src="pictures/loggo.jpg" alt="Логотип интернет-магазина" class="header__logo-img">
+  </div>
+  {{> menu}}
+  <div class="auth-container">
+    {{#if isAuthenticated}}
+      <span class="username">Вы вошли как {{username}}</span>
+      <a href="/?auth=false" class="auth-btn logout-btn">Выйти</a>
+    {{else}}
+      {{> login}}
+    {{/if}}
+  </div>
+</header>
+

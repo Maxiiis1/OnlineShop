@@ -1,0 +1,110 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Главная</title>
+  <script src="scripts/activePage.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+</head>
+
+{{> header}}
+
+<main class="main">
+  <h2>{{#if isEdit}}Редактировать товар{{else}}Создать новый товар{{/if}}</h2>
+
+  <form id="create-product-form">
+    <label>
+      Название:
+      <input type="text" name="name" value="{{product.name}}" required>
+    </label>
+
+    <label>
+      Цена:
+      <input type="number" step="0.01" name="price" value="{{product.price}}" required>
+    </label>
+
+    <label>
+      Описание:
+      <input type="text" name="description" value="{{product.description}}" required>
+    </label>
+
+    <label>
+      Категория ID:
+      <input type="number" name="categoryId" value="{{product.categoryId}}">
+    </label>
+
+    <label>
+      Главное изображение (URL):
+      <input type="text" name="mainImage" value="{{product.mainImage}}">
+    </label>
+
+    <label>
+      Доп. изображения (через запятую):
+      <input type="text" name="images" value="{{#if product.images}}{{product.images}}{{/if}}">
+    </label>
+
+    <button type="submit">{{#if isEdit}}Обновить{{else}}Создать{{/if}}</button>
+  </form>
+
+  <a href="/">← Назад в каталог</a>
+</main>
+
+{{> footer}}
+
+<script>
+  const form = document.getElementById('create-product-form');
+
+  form?.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    data.price = parseFloat(data.price);
+    data.categoryId = parseInt(data.categoryId);
+    if (data.images) {
+      data.images = data.images.split(',').map(i => i.trim());
+    }
+
+    fetch('/products', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => {
+        if (!res.ok) throw new Error('Ошибка запроса');
+        return res.json();
+      })
+      .then(data => {
+        toastr.success(`Товар "${data.product.name}" успешно создан!`);
+        form.reset();
+      })
+      .catch(err => {
+        toastr.error('Ошибка при создании товара');
+        console.error(err);
+      });
+  });
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const eventSource = new EventSource('/products/events');
+
+    eventSource.onmessage = function(event) {
+      console.log('SSE event received:', event);
+
+      try {
+        const product = JSON.parse(event.data);
+        toastr.success(`Обновлён каталог: ${product.name}`);
+      } catch (e) {
+        console.error('Error parsing event data:', e);
+      }
+    };
+
+    eventSource.onerror = function(event) {
+      console.error('SSE Error:', event);
+    };
+  });
+
+</script>

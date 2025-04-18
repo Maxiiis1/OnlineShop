@@ -1,0 +1,21 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Главная</title>
+  <script src="scripts/activePage.js" defer></script>
+  <script src="scripts/list.js" defer></script>
+</head>
+{{> header}}
+<main class="main">
+  <div class="task-container">
+    <h1>Список задач</h1>
+    <form id="taskForm">
+      <input type="text" id="taskInput" placeholder="Введите новую задачу" required>
+      <button type="submit">Добавить</button>
+    </form>
+    <ul id="taskList"></ul>
+    <button id="saveTasks">Сохранить задачи</button>
+    <button id="loadTasks">Загрузить предыдущие задачи</button>
+  </div>
+</main>
+{{> footer}}

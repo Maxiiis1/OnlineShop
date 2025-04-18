@@ -1,0 +1,100 @@
+/* Центрируем navbar */
+.navbar {
+    display: flex;
+    justify-content: center;
+    background-color: #ADD8DD;
+    padding: 10px;
+}
+
+.navbar ul {
+    list-style-type: none;
+    display: flex;
+    gap: 15px;
+}
+
+.navbar ul li {
+    padding: 10px;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+/* Форма логина справа */
+.login-container {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 50px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ADD8DD;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+}
+
+/* Стили для хедера */
+.header {
+    display: flex;
+    position: fixed;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ADD8DD;
+    padding: 10px 20px;
+    border-bottom: 2px solid #008CBA;
+}
+
+main {
+    margin-top: 100px; /* Установи это значение по высоте хедера */
+    padding: 20px;
+}
+/* Стили для логина и выхода */
+.auth-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Имя пользователя */
+.username {
+    color: #333;
+}
+
+.auth-btn {
+    background-color: #D3D3D3; /* Серый цвет */
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    transition: background 0.3s;
+    font-weight: normal; /* Обычный текст, как у навигации */
+    font-size: 16px; /* Размер шрифта как у navbar */
+}
+
+/* Эффект при наведении */
+.auth-btn:hover {
+    background-color: #B0B0B0; /* Темнее при наведении */
+}
+
+/* Дополнительно для выравнивания кнопки logout */
+.logout-btn {
+    display: inline-block;
+}
+
+
+/* Дополнительно для выравнивания кнопки logout */
+.logout-btn {
+    display: inline-block;
+}
+
+
